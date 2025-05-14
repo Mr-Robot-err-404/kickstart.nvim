@@ -202,11 +202,9 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          file_ignore_patterns = { 'pnpm-lock.*' },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -276,8 +274,10 @@ require('lazy').setup({
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {} },
-      'williamboman/mason-lspconfig.nvim',
+      -- { 'mason-org/mason.nvim', version = '^1.0.0' },
+      -- { 'mason-org/mason-lspconfig.nvim', version = '^1.0.0' },
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -413,6 +413,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua',
         'prettier',
+        'prettierd',
         'eslint',
         'biome',
       })
@@ -493,16 +494,17 @@ require('lazy').setup({
       conform.setup {
         formatters_by_ft = {
           lua = { 'stylua' },
-          javascript = js_formatters,
-          json = js_formatters,
-          jsonc = js_formatters,
-          javascriptreact = js_formatters,
-          typescript = js_formatters,
-          typescriptreact = js_formatters,
+          javascript = { 'prettierd' },
+          json = { 'prettierd' },
+          jsonc = { 'prettierd' },
+          javascriptreact = { 'prettierd' },
+          typescript = { 'prettierd' },
+          typescriptreact = { 'prettierd' },
           css = js_formatters,
           html = js_formatters,
           yaml = js_formatters,
           go = { 'gofmt', 'goimports' },
+          markdown = { 'prettierd' },
         },
         notify_on_error = false,
         format_on_save = function(bufnr)
