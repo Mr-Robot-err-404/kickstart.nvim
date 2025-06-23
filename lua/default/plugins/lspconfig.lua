@@ -1,11 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for Neovim
     -- Mason must be loaded before its dependents so we need to set it up here.
-    -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-    -- { 'mason-org/mason.nvim', version = '^1.0.0' },
-    -- { 'mason-org/mason-lspconfig.nvim', version = '^1.0.0' },
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -114,6 +110,8 @@ return {
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+    require('lspconfig').gdscript.setup(capabilities)
 
     local servers = {
       gopls = {},

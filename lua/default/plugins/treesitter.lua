@@ -17,6 +17,9 @@ return { -- Highlight, edit, and navigate code
       'vimdoc',
       'typescript',
       'javascript',
+      'gdscript',
+      'godot_resource',
+      'gdshader',
     },
     auto_install = true,
     highlight = {

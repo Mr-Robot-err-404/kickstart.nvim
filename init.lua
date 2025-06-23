@@ -39,6 +39,7 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 vim.opt.guicursor = 'n-v-i-c:block-Cursor'
+vim.o.shiftwidth = 0
 vim.o.tabstop = 4
 
 -- Configure how new splits should be opened
@@ -62,6 +63,7 @@ vim.opt.scrolloff = 10
 
 vim.opt.confirm = true
 
+vim.keymap.set('n', '<leader>p', '"_dP')
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps

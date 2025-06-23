@@ -9,7 +9,10 @@ return {
       view_options = {
         show_hidden = true,
       },
+      keymaps = {
+        ['_'] = false,
+      },
     }
-    vim.keymap.set('n', '<leader>pv', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+    vim.keymap.set('n', '<leader>-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
   end,
 }
