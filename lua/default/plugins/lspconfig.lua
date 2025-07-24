@@ -123,6 +123,8 @@ return {
           workingDirectories = { mode = 'auto' },
         },
       },
+      -- clangd = {},
+      -- intelephense = {},
       lua_ls = {
         -- cmd = { ... },
         -- filetypes = { ... },

@@ -21,33 +21,12 @@ return { -- Autoformat
       -- Check for biome.json in the project root
       local has_biome = vim.fn.filereadable(vim.fn.getcwd() .. '/biome.json') == 1
 
-      -- Check for prettier config files
-      local prettier_configs = {
-        '.prettierrc',
-        '.prettierrc.js',
-        '.prettierrc.json',
-        '.prettierrc.yml',
-        '.prettierrc.yaml',
-        'prettier.config.js',
-        'prettier.config.cjs',
-      }
-
-      local has_prettier = false
-      for _, config in ipairs(prettier_configs) do
-        if vim.fn.filereadable(vim.fn.getcwd() .. '/' .. config) == 1 then
-          has_prettier = true
-          break
-        end
-      end
-
       -- Prioritize based on found config files
-      if has_biome and not has_prettier then
+      if has_biome then
         return { 'biome-check' }
-      elseif has_prettier and not has_biome then
-        return { 'prettierd, prettier' }
       else
         -- If both or none are found, prefer prettierd then biome as fallback
-        return { 'prettierd', 'prettier', 'biome-check' }
+        return { 'prettier' }
       end
     end
 
@@ -57,17 +36,17 @@ return { -- Autoformat
     conform.setup {
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { 'prettier' },
-        json = { 'prettier' },
-        jsonc = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescript = { 'prettier' },
-        typescriptreact = { 'prettier' },
+        javascript = js_formatters,
+        json = js_formatters,
+        jsonc = js_formatters,
+        javascriptreact = js_formatters,
+        typescript = js_formatters,
+        typescriptreact = js_formatters,
         css = js_formatters,
         html = js_formatters,
-        yaml = { 'prettier' },
+        yaml = js_formatters,
         go = { 'gofmt', 'goimports' },
-        markdown = { 'prettier' },
+        markdown = js_formatters,
       },
       notify_on_error = false,
       format_on_save = function(bufnr)
